@@ -79,9 +79,15 @@ class AlumnoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(AlumnoRequest $request, Alumno $alumno)
+    public function update(AlumnoRequest $request, $id)
     {
         try {
+            $alumno = Alumno::find($id);
+
+            if (!$alumno) {
+                return ApiResponse::error('El alumno no fue encontrado', 404);
+            }
+    
             $alumno->update($request->validated());
     
             return ApiResponse::success($alumno,'Alumno actualizado exitosamente');
