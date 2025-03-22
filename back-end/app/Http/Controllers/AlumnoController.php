@@ -84,7 +84,7 @@ class AlumnoController extends Controller
         try {
             $alumno->update($request->validated());
     
-            return ApiResponse::success('Alumno actualizado exitosamente', $alumno);
+            return ApiResponse::success($alumno,'Alumno actualizado exitosamente');
         } catch (\Exception $e) {
             return ApiResponse::error('Error al actualizar el alumno', 500, $e->getMessage());
         }
