@@ -65,4 +65,10 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];
+
+
+    protected $routeMiddleware = [
+        // Middleware para verificar la API Key en las solicitudes.
+        'api.key' => \App\Http\Middleware\ApiKeyMiddleware::class,
+    ];
 }
