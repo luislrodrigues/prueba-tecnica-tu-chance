@@ -19,19 +19,25 @@ class AlumnoController extends Controller
         {
             try {
                 $query = Alumno::query();
-                if ($request->filled('grado')) {
-                    $query->where('grado', $request->grado);
+                
+                    if ($request->filled('grado')) {
+                        $query->where('grado_id', $request->grado);
+                    }
+                    
+                    if ($request->filled('nombre')) {
+                        $query->where('nombre', 'like', '%' . $request->nombre . '%');
+                    }
+                    
+                    $alumnos = $query->with('grado')->paginate(10);
+                    
+                    return response()->json($alumnos);
+                
+                } catch (Exception $e) {
+                    return ApiResponse::error('Error al obtener la lista de alumnos', 500, ['exception' => $e->getMessage()]);
                 }
-        
-                $alumnos = $query->get();
-        
-                return ApiResponse::success(AlumnoResource::collection($alumnos), 'Lista de alumnos obtenida correctamente');
-            
-            } catch (Exception $e) {
-                return ApiResponse::error('Error al obtener la lista de alumnos', 500, ['exception' => $e->getMessage()]);
-            }
         }
     }
+    
 
     /**
      * Store a newly created resource in storage.

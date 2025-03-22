@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlumnoController;
+use App\Http\Controllers\GradoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,5 +18,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('api.key')->group(function () {
     Route::resource('alumnos', AlumnoController::class);
+    Route::get('/grados', [GradoController::class, 'index']);
 });
 

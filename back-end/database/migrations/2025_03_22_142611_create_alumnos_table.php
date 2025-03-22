@@ -17,9 +17,10 @@ return new class extends Migration
             $table->date('fecha_nacimiento');
             $table->string('nombre_padre');
             $table->string('nombre_madre');
-            $table->integer('grado');
+            $table->foreignId('grado_id')->constrained()->onDelete('cascade');
             $table->string('seccion');
             $table->date('fecha_ingreso');
+            $table->enum('estado',['activo','inactivo'])->default('activo');
             $table->timestamps();
             $table->softDeletes();
         });

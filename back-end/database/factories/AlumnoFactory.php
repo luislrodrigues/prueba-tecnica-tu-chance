@@ -21,7 +21,7 @@ class AlumnoFactory extends Factory
             'fecha_nacimiento' => $this->faker->date('Y-m-d', '2015-01-01'),
             'nombre_padre' => $this->faker->name('male'),
             'nombre_madre' => $this->faker->name('female'),
-            'grado' => $this->faker->numberBetween(1, 12),
+            'grado_id' => $this->faker->numberBetween(1, 10),
             'seccion' => $this->faker->randomElement(['A', 'B', 'C']),
             'fecha_ingreso' => $this->faker->date('Y-m-d', '2023-01-01'),
         ];

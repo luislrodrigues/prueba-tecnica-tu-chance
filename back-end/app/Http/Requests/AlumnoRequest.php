@@ -30,9 +30,9 @@ class AlumnoRequest extends FormRequest
                     'fecha_nacimiento'  => ['bail', 'required', 'date'],
                     'nombre_padre'      => ['bail', 'required', 'string', 'max:255'],
                     'nombre_madre'      => ['bail', 'required', 'string', 'max:255'],
-                    'grado'             => ['bail', 'required', 'string', 'max:50'],
+                    'grado_id'          => ['bail', 'required', 'exists:grados,id'],
                     'seccion'           => ['bail', 'required', 'string', 'max:10'],
-                    'fecha_ingreso'     => ['bail', 'required', 'date'],
+                    'fecha_ingreso'     => ['bail', 'required', 'date','after:fecha_nacimiento'],
                 ];
                 
             case 'PUT': // Actualizar alumno
@@ -41,9 +41,9 @@ class AlumnoRequest extends FormRequest
                     'fecha_nacimiento'  => ['bail', 'required', 'date'],
                     'nombre_padre'      => ['bail', 'required', 'string', 'max:255'],
                     'nombre_madre'      => ['bail', 'required', 'string', 'max:255'],
-                    'grado'             => ['bail', 'required', 'string', 'max:50'],
+                    'grado_id'          => ['bail', 'required', 'exists:grados,id'],
                     'seccion'           => ['bail', 'required', 'string', 'max:10'],
-                    'fecha_ingreso'     => ['bail', 'required', 'date'],
+                    'fecha_ingreso'     => ['bail', 'required', 'date','after:fecha_nacimiento'],
                 ];
                 
             default:
@@ -53,8 +53,11 @@ class AlumnoRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
+        // Convertir errores en un array plano
+        $errores = collect($validator->errors())->flatten()->all();
+    
         throw new HttpResponseException(
-            ApiResponse::error('Errores de validación', 422, $validator->errors())
+            ApiResponse::error('Errores de validación', 422, $errores)
         );
     }
 
