@@ -4,7 +4,6 @@
       <h2 class="text-center text-primary mb-4">Detalle del Alumno</h2>
       <div >
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"><strong>ID:</strong> {{ alumno.id }}</li>
           <li class="list-group-item"><strong>Nombre:</strong> {{ alumno.nombre }}</li>
           <li class="list-group-item"><strong>Fecha de nacimiento:</strong> {{ alumno.fecha_nacimiento }}</li>
           <li class="list-group-item"><strong>Nombre del padre:</strong> {{ alumno.nombre_padre }}</li>
